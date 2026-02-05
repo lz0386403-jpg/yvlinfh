@@ -4,65 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 1. SEO 核心标签 (让搜索引擎读懂网站) -->
-    <title>玉鳞防护 | 油气勘探传感器智能监测平台 | 挑战杯金奖项目</title>
-    <meta name="description" content="玉鳞防护（Jade Scale Protection）致力于解决油气勘探传感器早期失效问题。依托中国地质大学（北京），采用仿生涂层保护技术结合区块链溯源，提供传感器全生命周期性能监测、故障预警及主动维护解决方案，为工业数据保驾护航。">
-    <meta name="keywords" content="玉鳞防护, 传感器监测, 区块链技术, 油气勘探, 仿生涂层, 智能维护, 挑战杯, 中国地质大学, 工业互联网, 设备故障诊断">
-    <meta name="author" content="玉鳞防护团队">
+    <!-- SEO -->
+    <title>碧鳞智芯 | 智能传感器与区块链监测平台</title>
+    <meta name="description" content="碧鳞智芯提供基于BDD仿生涂层的井下传感器硬件及区块链主动维护系统。">
     
-    <!-- 2. 社交媒体分享卡片优化 (微信/领英分享时显示) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="玉鳞防护 - 为工业数据保驾护航">
-    <meta property="og:description" content="基于区块链与仿生技术的传感器智能监测平台。让数据更准确、更稳定、更安全。">
-    <meta property="og:image" content="logo.png"> <!-- 确保分享时显示Logo -->
-
-    <!-- Tailwind CSS -->
+    <!-- 依赖库 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js (图表库) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- AOS Animation Library (滚动动画库) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <!-- Google Fonts (中文思源黑体) -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom Config & Styles -->
+    <!-- 配置 -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         jade: {
-                            50: '#f0fdf9',
-                            100: '#ccfbf1',
-                            500: '#14b8a6', // Primary Teal (主色调)
-                            700: '#0f766e',
-                            900: '#134e4a', // Deep Ocean
+                            50: '#f0fdf9', 100: '#ccfbf1', 400: '#2dd4bf', 500: '#14b8a6', 600: '#0d9488', 900: '#134e4a',
                         },
-                        oil: {
-                            800: '#1e293b', // Industrial Slate
-                            900: '#0f172a',
-                        },
-                        alert: '#f59e0b',
+                        oil: { 800: '#1e293b', 900: '#0f172a' } 
                     },
-                    fontFamily: {
-                        sans: ['"Noto Sans SC"', 'sans-serif'],
-                    },
+                    fontFamily: { sans: ['"Noto Sans SC"', 'sans-serif'] },
                     animation: {
-                        'gradient-x': 'gradient-x 15s ease infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flow': 'flow 3s linear infinite',
                     },
                     keyframes: {
-                        'gradient-x': {
-                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
-                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
-                        },
-                        'float': {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                        flow: {
+                            '0%': { backgroundPosition: '0 0' },
+                            '100%': { backgroundPosition: '20px 0' }
                         }
                     }
                 }
@@ -71,675 +45,791 @@
     </script>
 
     <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
-
-        /* Chart Container Rules */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 380px;
-            }
-        }
-
-        /* 3D Card Hover Effect */
-        .hover-card-3d {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .hover-card-3d:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        /* Tech Content Fade Transition */
-        .tech-content {
-            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-        }
-        .tech-content.hidden {
-            opacity: 0;
-            transform: translateX(20px);
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+        /* 视图切换动画 */
+        .view-section {
             display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
         }
-        .tech-content.active {
-            opacity: 1;
-            transform: translateX(0);
-            position: relative;
+        .view-section.active {
             display: block;
+            opacity: 1;
+        }
+        
+        /* 监控屏特效 */
+        .monitor-bg {
+            background-color: #0b1121;
+            background-image: 
+                linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .neon-border {
+            box-shadow: 0 0 10px rgba(20, 184, 166, 0.2), inset 0 0 20px rgba(20, 184, 166, 0.05);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+        
+        /* 流程图连接线动画 */
+        .process-line {
+            background: repeating-linear-gradient(90deg, #14b8a6 0, #14b8a6 10px, transparent 10px, transparent 20px);
+            background-size: 200% 100%;
+            animation: flow 20s linear infinite;
         }
 
-        /* Hero Background Animation */
-        .animated-bg {
-            background: linear-gradient(-45deg, #0f172a, #134e4a, #0f766e, #1e293b);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* 新闻卡片悬停效果 */
+        .news-card:hover img {
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-oil-800 font-sans selection:bg-jade-100 selection:text-jade-900 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-800 antialiased overflow-x-hidden selection:bg-jade-500 selection:text-white">
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- ================= 顶部导航栏 ================= -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center gap-3 cursor-pointer group" onclick="scrollToSection('hero')">
-                    <!-- LOGO: 优先显示图片，加载失败显示文字图标 -->
-                    <img src="logo.png" alt="玉鳞防护 Logo" class="h-12 w-auto object-contain drop-shadow-sm transition-transform duration-500 group-hover:rotate-12" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="hidden w-10 h-10 bg-jade-500 rounded-br-xl rounded-tl-xl rounded-tr-sm rounded-bl-sm items-center justify-center text-white font-bold text-xl shadow-lg">玉</div>
-                    
-                    <span class="font-bold text-2xl tracking-wide text-oil-900 group-hover:text-jade-600 transition-colors">玉鳞防护</span>
+                <!-- Logo区域 -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                    <img src="logo.png" alt="Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                    <div class="hidden w-10 h-10 bg-jade-500 rounded text-white flex items-center justify-center font-bold text-xl">碧</div>
+                    <span class="font-bold text-2xl tracking-wide text-oil-900">碧鳞智芯</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-600 hover:text-jade-600 font-medium transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-jade-500 after:transition-all after:duration-300 hover:after:w-full">核心理念</a>
-                    <a href="#technology" class="text-gray-600 hover:text-jade-600 font-medium transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-jade-500 after:transition-all after:duration-300 hover:after:w-full">技术方案</a>
-                    <a href="#dashboard" class="text-gray-600 hover:text-jade-600 font-medium transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-jade-500 after:transition-all after:duration-300 hover:after:w-full">发展数据</a>
-                    <a href="#roadmap" class="text-gray-600 hover:text-jade-600 font-medium transition-colors relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-jade-500 after:transition-all after:duration-300 hover:after:w-full">未来规划</a>
+                
+                <!-- 导航菜单 -->
+                <div class="hidden md:flex space-x-1">
+                    <button onclick="navigateTo('home')" class="nav-btn px-4 py-2 text-gray-600 hover:text-jade-600 font-medium rounded-lg hover:bg-slate-50 transition-all">首页概览</button>
+                    <button onclick="navigateTo('products')" class="nav-btn px-4 py-2 text-gray-600 hover:text-jade-600 font-medium rounded-lg hover:bg-slate-50 transition-all">产品矩阵</button>
+                    <button onclick="navigateTo('news')" class="nav-btn px-4 py-2 text-gray-600 hover:text-jade-600 font-medium rounded-lg hover:bg-slate-50 transition-all">新闻动态</button>
+                    <button onclick="navigateTo('about')" class="nav-btn px-4 py-2 text-gray-600 hover:text-jade-600 font-medium rounded-lg hover:bg-slate-50 transition-all">关于我们</button>
+                    <button onclick="navigateTo('monitor')" class="nav-btn px-4 py-2 text-gray-600 hover:text-jade-600 font-medium rounded-lg hover:bg-slate-50 transition-all flex items-center gap-2">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                        </span>
+                        系统监控
+                    </button>
                 </div>
-                <button class="bg-jade-500 hover:bg-jade-400 text-white px-6 py-2.5 rounded-full font-bold transition-all shadow-lg shadow-jade-500/30 transform hover:scale-105 active:scale-95" onclick="alert('感谢您的兴趣！请联系 business@yulin.cn')">
-                    联系合作
+
+                <button class="bg-jade-500 hover:bg-jade-600 text-white px-5 py-2 rounded-full font-bold shadow-lg shadow-jade-500/30 text-sm transition-all transform hover:scale-105" onclick="jumpToContact()">
+                    联系我们
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden animated-bg text-white">
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black/10"></div>
+    <!-- ================= 视图容器 ================= -->
+    <main class="pt-20 min-h-screen">
 
-        <!-- Decorative Particles -->
-        <div class="absolute top-20 left-20 w-4 h-4 bg-jade-400 rounded-full animate-bounce opacity-50 delay-700"></div>
-        <div class="absolute bottom-40 right-20 w-6 h-6 bg-blue-400 rounded-full animate-pulse opacity-50 delay-1000"></div>
+        <!-- ★★★ 视图 1: 首页 (Home - 聚合展示版) ★★★ -->
+        <section id="view-home" class="view-section active">
+            <!-- 1. Hero Banner -->
+            <div class="relative bg-oil-900 text-white overflow-hidden min-h-[600px] flex items-center">
+                <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+                <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-jade-500/20 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8" data-aos="fade-right" data-aos-duration="1000">
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-jade-100 text-sm font-semibold backdrop-blur-md hover:bg-white/20 transition-colors cursor-default">
-                        <span class="w-2 h-2 rounded-full bg-jade-400 animate-ping"></span>
-                        <span class="w-2 h-2 rounded-full bg-jade-400 absolute ml-0"></span>
-                        区块链 + 仿生涂层技术
-                    </div>
-                    <h1 class="text-5xl lg:text-7xl font-black leading-tight tracking-tight drop-shadow-lg">
-                        为工业“数据”<br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-jade-300 to-teal-100 animate-pulse-slow">保驾护航</span>
-                    </h1>
-                    <p class="text-xl text-slate-200 max-w-xl leading-relaxed font-light" data-aos="fade-up" data-aos-delay="200">
-                        基于区块链的先进油气勘探传感器性能监测平台。我们致力于解决传感器早期失效问题，让数据更准确、更稳定、更安全。
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-4" data-aos="fade-up" data-aos-delay="400">
-                        <button onclick="scrollToSection('technology')" class="group relative px-8 py-4 bg-jade-500 hover:bg-jade-400 text-white font-bold rounded-xl shadow-lg shadow-jade-500/30 transition-all overflow-hidden">
-                            <span class="relative z-10 flex items-center gap-2">探索技术 <span class="group-hover:translate-x-1 transition-transform">→</span></span>
-                            <div class="absolute inset-0 h-full w-full scale-0 rounded-xl transition-all duration-300 group-hover:scale-100 group-hover:bg-jade-400/50"></div>
-                        </button>
-                        <button onclick="scrollToSection('dashboard')" class="px-8 py-4 border border-white/30 hover:bg-white/10 text-slate-100 font-semibold rounded-xl transition-all backdrop-blur-sm">
-                            查看数据
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Hero Image -->
-                <div class="relative flex justify-center animate-float" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
-                    <div class="absolute inset-0 bg-jade-500/30 blur-[80px] rounded-full transform scale-75 animate-pulse"></div>
-                    
-                    <img src="logo.png" alt="玉鳞防护 - 盾牌与鱼眼" class="relative z-10 w-full max-w-md h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; document.getElementById('fallback-hero').style.display='flex'">
-                    
-                    <div id="fallback-hero" class="hidden w-72 h-80 bg-gradient-to-b from-jade-500 to-teal-700 rounded-[3rem] rounded-tl-[1rem] rounded-br-[1rem] shadow-2xl items-center justify-center relative border border-white/10">
-                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-                        <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-inner relative overflow-hidden group">
-                            <div class="w-16 h-16 bg-oil-900 rounded-full flex items-center justify-center transition-all duration-500 group-hover:bg-alert">
-                                <div class="w-4 h-4 bg-white rounded-full absolute top-3 right-4"></div>
-                            </div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+                    <div data-aos="fade-right">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-jade-500/50 rounded-full bg-jade-900/30 text-jade-300 text-xs font-bold tracking-wider">
+                            <i class="fa-solid fa-star"></i> 专注油气勘探智能监测
                         </div>
-                        <div class="absolute -bottom-6 bg-white text-oil-900 px-6 py-2 rounded-lg font-bold shadow-lg">
-                            玉鳞防护
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Context Intro Section -->
-    <section id="intro-context" class="py-16 bg-white border-b border-gray-100 relative">
-        <div class="max-w-4xl mx-auto px-4 text-center" data-aos="fade-up" data-aos-duration="800">
-            <h3 class="text-sm font-bold text-jade-600 uppercase tracking-widest mb-4">项目背景</h3>
-            <p class="text-2xl md:text-3xl text-gray-800 font-light leading-relaxed">
-                在<span class="font-bold text-oil-900 border-b-4 border-jade-200">“数字中国”</span>建设背景下，油气勘探的数字化转型迫在眉睫。然而，深部地层环境恶劣，导致传感器<span class="text-red-500 font-bold decoration-4 underline decoration-red-200">早期失效</span>频繁。本项目依托<span class="font-bold text-oil-900">中国地质大学（北京）</span>，通过材料科学与信息技术的交叉创新，填补市场空白。
-            </p>
-        </div>
-    </section>
-
-    <!-- Core Philosophy (About) -->
-    <section id="about" class="py-24 bg-slate-50 relative overflow-hidden">
-        <img src="logo.png" class="absolute -left-20 top-20 w-96 opacity-[0.03] rotate-12 pointer-events-none" alt="">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16" data-aos="fade-down">
-                <h2 class="text-3xl md:text-4xl font-black text-oil-900 mb-4">设计理念与愿景</h2>
-                <div class="w-20 h-1.5 bg-jade-500 mx-auto rounded-full"></div>
-                <p class="mt-4 text-gray-500">LOGO 寓意解析</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-card-3d group" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-16 h-16 bg-jade-100 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 group-hover:bg-jade-500 group-hover:text-white transition-all duration-300 text-jade-600">
-                        🛡️
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-oil-900">仿生盾牌</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        LOGO外形将“鱼”抽象为盾牌。象征利用鱼鳞仿生结构涂层，为传感器电极提供物理级保护，抵抗地下高腐蚀环境。
-                    </p>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-card-3d group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 text-blue-600">
-                        👁️
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-oil-900">智能鱼眼</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        LOGO中的红点将“鱼眼”抽象为警示灯。象征全天候、安全可靠的监控系统，时刻感知传感器状态，防患于未然。
-                    </p>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover-card-3d group" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-16 h-16 bg-amber-100 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 text-amber-600">
-                        ⛓️
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-oil-900">区块链溯源</h3>
-                    <p class="text-gray-600 leading-relaxed">
-                        利用区块链不可篡改特性，对故障进行精准追溯，确保数据资产的安全性与真实性，为能源数据保驾护航。
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Section -->
-    <section id="technology" class="py-20 bg-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(#14b8a6 1px, transparent 1px); background-size: 24px 24px;"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-            <div class="flex flex-col md:flex-row gap-12">
-                <!-- Left: Navigation/Menu -->
-                <div class="md:w-1/3" data-aos="fade-right">
-                    <h2 class="text-3xl font-black text-oil-900 mb-6">四大核心技术<br><span class="text-jade-600">全方位防护</span></h2>
-                    <p class="text-gray-600 mb-8">点击下方模块，深入了解我们如何通过软硬件结合，重塑传感器生命周期管理。</p>
-                    
-                    <div class="space-y-4" id="tech-tabs">
-                        <button onclick="switchTech('coating')" class="tech-tab w-full text-left px-6 py-4 rounded-xl font-bold transition-all transform hover:scale-105 bg-jade-500 text-white shadow-lg ring-2 ring-jade-500 ring-offset-2" data-target="coating">
-                            01 涂层保护技术
-                        </button>
-                        <button onclick="switchTech('monitoring')" class="tech-tab w-full text-left px-6 py-4 rounded-xl font-bold transition-all transform hover:scale-105 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:shadow-md" data-target="monitoring">
-                            02 远程监控系统
-                        </button>
-                        <button onclick="switchTech('maintenance')" class="tech-tab w-full text-left px-6 py-4 rounded-xl font-bold transition-all transform hover:scale-105 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:shadow-md" data-target="maintenance">
-                            03 主动维护机制
-                        </button>
-                        <button onclick="switchTech('traceability')" class="tech-tab w-full text-left px-6 py-4 rounded-xl font-bold transition-all transform hover:scale-105 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:shadow-md" data-target="traceability">
-                            04 故障追溯体系
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Right: Content Area -->
-                <div class="md:w-2/3 bg-slate-50 rounded-3xl p-8 md:p-12 border border-gray-200 relative min-h-[450px] shadow-inner" data-aos="fade-left" data-aos-delay="200">
-                    
-                    <!-- Content: Coating -->
-                    <div id="content-coating" class="tech-content active">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="p-3 bg-jade-100 rounded-lg text-2xl animate-bounce">🛡️</div>
-                            <h3 class="text-2xl font-bold text-oil-900">仿生涂层保护</h3>
-                        </div>
-                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                            借鉴自然界生物特性，研发特种仿生结构涂层。该涂层直接作用于传感器关键电极表面，具备极高的耐腐蚀性和耐磨性。
+                        <h1 class="text-5xl lg:text-7xl font-black leading-tight mb-6">
+                            为工业“数据”<br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-jade-400 to-cyan-300">保驾护航</span>
+                        </h1>
+                        <p class="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed">
+                            打造基于区块链的先进油气勘探传感器性能监测平台。集 <b>涂层保护、远程监控、主动维护、故障追溯</b> 于一体，解决早期失效难题。
                         </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-start gap-3">
-                                <div class="w-6 h-6 rounded-full bg-jade-100 flex items-center justify-center text-jade-600 text-xs mt-0.5">✓</div>
-                                <span class="text-gray-700">有效隔绝地下高盐、高酸环境，保护电极</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="w-6 h-6 rounded-full bg-jade-100 flex items-center justify-center text-jade-600 text-xs mt-0.5">✓</div>
-                                <span class="text-gray-700">超薄设计，不影响传感器灵敏度与信号传输</span>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <div class="w-6 h-6 rounded-full bg-jade-100 flex items-center justify-center text-jade-600 text-xs mt-0.5">✓</div>
-                                <span class="text-gray-700 font-bold">延长设备使用寿命 300%+</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Content: Monitoring -->
-                    <div id="content-monitoring" class="tech-content hidden">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="p-3 bg-blue-100 rounded-lg text-2xl animate-pulse">📡</div>
-                            <h3 class="text-2xl font-bold text-oil-900">远程监控系统</h3>
-                        </div>
-                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                            利用物联网（IoT）技术，实时采集传感器工作参数。数据通过加密通道传输至云端平台，管理人员可随时随地查看设备健康度。
-                        </p>
-                        <div class="grid grid-cols-2 gap-6 mt-8">
-                            <div class="bg-white p-6 rounded-xl shadow-sm text-center border border-gray-100 hover:shadow-md transition-shadow">
-                                <div class="font-black text-3xl text-blue-600 mb-1">ms级</div>
-                                <div class="text-sm text-gray-500 font-medium">数据延迟</div>
-                            </div>
-                            <div class="bg-white p-6 rounded-xl shadow-sm text-center border border-gray-100 hover:shadow-md transition-shadow">
-                                <div class="font-black text-3xl text-blue-600 mb-1">24/7</div>
-                                <div class="text-sm text-gray-500 font-medium">不间断监测</div>
-                            </div>
+                        <div class="flex gap-4">
+                            <button onclick="navigateTo('products')" class="px-8 py-4 bg-jade-500 hover:bg-jade-400 text-white font-bold rounded-xl shadow-lg shadow-jade-500/30 transition-all hover:-translate-y-1">
+                                查看四大产品
+                            </button>
+                            <button onclick="navigateTo('monitor')" class="px-8 py-4 border border-slate-600 hover:bg-white/5 text-slate-300 font-bold rounded-xl transition-all">
+                                进入监控后台
+                            </button>
                         </div>
                     </div>
-
-                    <!-- Content: Maintenance -->
-                    <div id="content-maintenance" class="tech-content hidden">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="p-3 bg-amber-100 rounded-lg text-2xl animate-spin-slow">🔧</div>
-                            <h3 class="text-2xl font-bold text-oil-900">主动维护机制</h3>
-                        </div>
-                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                            告别“坏了再修”。系统基于大数据算法，自动分析传感器性能衰减趋势，在故障发生前发出预警，并生成维护建议。
-                        </p>
-                        <div class="bg-amber-50 p-6 rounded-xl border-l-4 border-amber-500 mt-4">
-                            <p class="font-bold text-amber-900 mb-2">核心价值：</p>
-                            <p class="text-amber-800">将非计划停机时间降低 80%，大幅减少油气田因设备故障导致的经济损失。</p>
+                    <!-- 右侧视觉图 -->
+                    <div class="relative hidden lg:flex justify-center" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="relative w-80 h-80">
+                            <!-- 模拟雷达扫描动画 -->
+                            <div class="absolute inset-0 border border-jade-500/30 rounded-full animate-[spin_10s_linear_infinite]"></div>
+                            <div class="absolute inset-4 border border-jade-500/20 rounded-full"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-jade-500/10 to-transparent rounded-full animate-pulse"></div>
+                            <img src="logo.png" class="absolute inset-0 m-auto w-48 h-auto drop-shadow-2xl animate-float" alt="Core Tech">
                         </div>
                     </div>
-
-                    <!-- Content: Traceability -->
-                    <div id="content-traceability" class="tech-content hidden">
-                        <div class="flex items-center gap-4 mb-6">
-                            <div class="p-3 bg-purple-100 rounded-lg text-2xl">🔗</div>
-                            <h3 class="text-2xl font-bold text-oil-900">故障追溯体系</h3>
-                        </div>
-                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                            依托区块链的不可篡改性，记录传感器从出厂、安装、运行到报废的全生命周期数据。一旦发生事故，可快速定责与溯源。
-                        </p>
-                        <ul class="space-y-4">
-                            <li class="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-purple-100 hover:bg-purple-50 transition-colors">
-                                <div class="w-3 h-3 rounded-full bg-purple-500"></div>
-                                <span class="text-gray-700">关键数据上链，防止人为篡改</span>
-                            </li>
-                            <li class="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-purple-100 hover:bg-purple-50 transition-colors">
-                                <div class="w-3 h-3 rounded-full bg-purple-500"></div>
-                                <span class="text-gray-700">智能合约自动执行维保记录</span>
-                            </li>
-                        </ul>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Interactive Dashboard Section -->
-    <section id="dashboard" class="py-20 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12" data-aos="fade-up">
-                <h2 class="text-3xl font-black mb-2 text-white">发展规划与影响力</h2>
-                <p class="text-slate-400">基于详细的市场调研与财务模型，我们展示未来的增长潜力与社会价值。</p>
+            <!-- 2. 核心竞争力 -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-black text-oil-900">核心竞争力</h2>
+                        <div class="w-12 h-1 bg-jade-500 mx-auto mt-4 rounded-full"></div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all group hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-jade-100 rounded-xl flex items-center justify-center text-3xl mb-6 text-jade-600 group-hover:scale-110 transition-transform">🛡️</div>
+                            <h3 class="text-xl font-bold mb-3 text-oil-900">BDD仿生涂层</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed">鱼鳞仿生结构+氟化改性，抗冲蚀能力提升400%，适配150℃高温与50MPa高压环境。</p>
+                        </div>
+                        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all group hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center text-3xl mb-6 text-blue-600 group-hover:scale-110 transition-transform">⛓️</div>
+                            <h3 class="text-xl font-bold mb-3 text-oil-900">区块链溯源</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed">数据实时上链，去中心化存储，确保数据不可篡改，故障定责有据可依。</p>
+                        </div>
+                        <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all group hover:-translate-y-1">
+                            <div class="w-14 h-14 bg-amber-100 rounded-xl flex items-center justify-center text-3xl mb-6 text-amber-600 group-hover:scale-110 transition-transform">🔧</div>
+                            <h3 class="text-xl font-bold mb-3 text-oil-900">主动维护机制</h3>
+                            <p class="text-gray-500 text-sm leading-relaxed">智能合约自动触发预警，无需人工干预即可发现早期异常，运维效率提升60%。</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12">
-                
-                <!-- Financial Projection Chart -->
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-jade-500 transition-colors duration-500" data-aos="zoom-in-right" data-aos-delay="200">
-                    <div class="flex justify-between items-center mb-6">
+            <!-- 3. 产品矩阵预览 -->
+            <div class="py-20 bg-slate-50 border-y border-gray-200">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="flex justify-between items-end mb-12">
                         <div>
-                            <h3 class="text-xl font-bold text-jade-400">利润预测 (5年)</h3>
-                            <p class="text-sm text-slate-400">单位：万元 (CNY)</p>
+                            <h2 class="text-3xl font-black text-oil-900">明星产品系列</h2>
+                            <p class="mt-2 text-gray-500">覆盖深地、深海、便携运维全场景</p>
                         </div>
-                        <div class="text-right">
-                            <div class="text-2xl font-bold text-white">Top 15%</div>
-                            <div class="text-xs text-slate-500">行业增长率</div>
+                        <button onclick="navigateTo('products')" class="text-jade-600 font-bold hover:translate-x-1 transition-transform">查看全部产品 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="group bg-white rounded-2xl p-6 flex items-center gap-6 shadow-sm hover:shadow-lg transition-all cursor-pointer" onclick="navigateTo('products')">
+                            <img src="chuanganqi.png" class="w-32 h-32 object-contain group-hover:scale-110 transition-transform" alt="Y系列">
+                            <div>
+                                <div class="text-xs font-bold text-red-500 mb-1">耐高温高压</div>
+                                <h3 class="text-xl font-bold text-oil-900">Y系列井下传感器</h3>
+                                <p class="text-sm text-gray-500 mt-2 line-clamp-2">BDD涂层防护，抗150℃高温，一体化监测压力、温度与介质成分。</p>
+                            </div>
+                        </div>
+                        <div class="group bg-white rounded-2xl p-6 flex items-center gap-6 shadow-sm hover:shadow-lg transition-all cursor-pointer" onclick="navigateTo('products')">
+                            <img src="yunweiyi.png" class="w-32 h-32 object-contain group-hover:scale-110 transition-transform" alt="B系列">
+                            <div>
+                                <div class="text-xs font-bold text-amber-500 mb-1">便携运维</div>
+                                <h3 class="text-xl font-bold text-oil-900">B系列运维检测仪</h3>
+                                <p class="text-sm text-gray-500 mt-2 line-clamp-2">手提箱式设计，现场快速校准电极与涂层磨损检测。</p>
+                            </div>
                         </div>
                     </div>
-                    <!-- Chart Container -->
-                    <div class="chart-container">
-                        <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- 4. 智能监控入口 -->
+            <div class="py-16 bg-oil-900 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-10 bg-[url('process.png')] bg-cover bg-center mix-blend-overlay"></div>
+                <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+                    <span class="text-jade-400 font-bold tracking-widest uppercase text-sm">Real-time Monitoring</span>
+                    <h2 class="text-3xl md:text-4xl font-black text-white mt-2 mb-6">全流程数据闭环监控系统</h2>
+                    <p class="text-slate-300 mb-8 max-w-2xl mx-auto">集成采集、上链、监控、分析、维护、溯源六大功能，让看不见的数据变得清晰可见。</p>
+                    <button onclick="navigateTo('monitor')" class="bg-jade-500 hover:bg-jade-400 text-white px-8 py-4 rounded-full font-bold shadow-lg shadow-jade-500/20 transition-all hover:scale-105">
+                        <i class="fa-solid fa-display mr-2"></i> 进入监控大屏
+                    </button>
+                </div>
+            </div>
+
+            <!-- 5. 最新资讯预览 -->
+            <div class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="flex justify-between items-end mb-12">
+                        <h2 class="text-3xl font-black text-oil-900">最新动态</h2>
+                        <button onclick="navigateTo('news')" class="text-jade-600 font-bold hover:translate-x-1 transition-transform">更多资讯 <i class="fa-solid fa-arrow-right ml-1"></i></button>
                     </div>
-                    <p class="mt-4 text-sm text-slate-400 border-t border-slate-700 pt-3">
-                        *数据来源：基于第一年1360万元营收基准的保守估算。预计第3年实现爆发式增长。
-                    </p>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition-all cursor-pointer" onclick="navigateTo('news')">
+                            <img src="zhongbiao.png" class="w-full h-40 object-cover" alt="中标">
+                            <div class="p-5">
+                                <span class="text-xs text-jade-600 font-bold bg-jade-50 px-2 py-1 rounded">重大喜讯</span>
+                                <h3 class="font-bold text-oil-900 mt-2 line-clamp-1">中标中海石油北京研究中心招标项目</h3>
+                                <div class="text-xs text-gray-400 mt-2">2026-01-23</div>
+                            </div>
+                        </div>
+                        <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition-all cursor-pointer" onclick="navigateTo('news')">
+                            <img src="huiyi.png" class="w-full h-40 object-cover" alt="会议">
+                            <div class="p-5">
+                                <span class="text-xs text-blue-600 font-bold bg-blue-50 px-2 py-1 rounded">学术交流</span>
+                                <h3 class="font-bold text-oil-900 mt-2 line-clamp-1">受邀参加第六届CEAM国际会议</h3>
+                                <div class="text-xs text-gray-400 mt-2">2023-03-13</div>
+                            </div>
+                        </div>
+                        <div class="border border-gray-100 rounded-xl overflow-hidden hover:shadow-md transition-all cursor-pointer" onclick="navigateTo('news')">
+                            <img src="safe.png" class="w-full h-40 object-contain p-4 bg-gray-50" alt="合作">
+                            <div class="p-5">
+                                <span class="text-xs text-red-600 font-bold bg-red-50 px-2 py-1 rounded">战略合作</span>
+                                <h3 class="font-bold text-oil-900 mt-2 line-clamp-1">与北京赛必达达成合作意向</h3>
+                                <div class="text-xs text-gray-400 mt-2">商业落地</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 关于我们预览 -->
+            <div class="py-20 bg-jade-50">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm flex flex-col md:flex-row items-center gap-12">
+                        <div class="md:w-1/2">
+                            <h2 class="text-3xl font-black text-oil-900 mb-6">关于碧鳞智芯</h2>
+                            <p class="text-gray-600 leading-relaxed mb-6">
+                                北京市碧鳞智芯有限责任公司依托中国地质大学（北京）深厚科研底蕴，汇聚高校科研人才与行业资深专家。我们致力于解决油气勘探传感器早期失效痛点，为建设能源强国提供坚实技术支撑。
+                            </p>
+                            <button onclick="navigateTo('about')" class="mt-4 text-oil-900 font-bold border-b-2 border-jade-500 hover:text-jade-600 transition-colors">了解更多团队故事</button>
+                        </div>
+                        <div class="md:w-1/2 relative">
+                            <div class="absolute inset-0 bg-jade-200 rounded-full blur-3xl opacity-20"></div>
+                            <img src="lqp.jpg" class="relative z-10 w-32 h-32 rounded-full border-4 border-white shadow-lg inline-block -mr-4" alt="团队成员">
+                            <img src="yx.png" class="relative z-10 w-32 h-32 rounded-full border-4 border-white shadow-lg inline-block -mr-4" alt="团队成员">
+                            <img src="yr.jpg" class="relative z-10 w-32 h-32 rounded-full border-4 border-white shadow-lg inline-block" alt="团队成员">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ★★★ 视图 2: 产品矩阵 (Product Matrix) ★★★ -->
+        <section id="view-products" class="view-section bg-slate-50 min-h-screen">
+            <div class="bg-white py-16 shadow-sm border-b border-gray-100">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h2 class="text-4xl font-black text-oil-900">四大核心产品系列</h2>
+                    <p class="mt-4 text-gray-500 max-w-2xl mx-auto">覆盖深地、深海、便携运维及集群监测全场景，构建“1+4”产品生态矩阵。</p>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 py-16">
+                <!-- 产品网格：2x2 -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- 产品 1: Y系列 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 cursor-pointer flex flex-col" onclick="showProductDetail('y')">
+                        <div class="h-64 bg-gray-100 relative overflow-hidden flex items-center justify-center p-6">
+                            <img src="chuanganqi.png" alt="井下传感器" class="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-red-500 text-white text-xs px-3 py-1 rounded-full font-bold">耐高温高压</div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <h3 class="text-2xl font-bold text-oil-900 mb-2 group-hover:text-jade-600 transition-colors">井下多参数传感器 (Y系列)</h3>
+                            <p class="text-gray-500 text-sm mb-4 line-clamp-2">针对深层油气勘探设计，BDD涂层防护，抗150℃高温，一体化监测压力、温度与介质成分。</p>
+                            <div class="mt-auto flex justify-between items-center border-t border-gray-100 pt-4">
+                                <span class="text-xs font-mono text-gray-400">Model: YL-S200</span>
+                                <span class="text-jade-600 font-bold text-sm flex items-center">查看详情 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 产品 2: H系列 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 cursor-pointer flex flex-col" onclick="showProductDetail('h')">
+                        <div class="h-64 bg-gray-100 relative overflow-hidden flex items-center justify-center p-6">
+                            <img src="jiance.png" alt="防腐蚀监测终端" class="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-blue-500 text-white text-xs px-3 py-1 rounded-full font-bold">深海防腐</div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <h3 class="text-2xl font-bold text-oil-900 mb-2 group-hover:text-jade-600 transition-colors">防腐蚀监测终端 (H系列)</h3>
+                            <p class="text-gray-500 text-sm mb-4 line-clamp-2">专为海洋平台设计，防水2000米，抗盐雾腐蚀，集成潮汐洋流采集与自清洁功能。</p>
+                            <div class="mt-auto flex justify-between items-center border-t border-gray-100 pt-4">
+                                <span class="text-xs font-mono text-gray-400">Model: YL-C100</span>
+                                <span class="text-jade-600 font-bold text-sm flex items-center">查看详情 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 产品 3: B系列 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 cursor-pointer flex flex-col" onclick="showProductDetail('b')">
+                        <div class="h-64 bg-gray-100 relative overflow-hidden flex items-center justify-center p-6">
+                            <img src="yunweiyi.png" alt="便携运维仪" class="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-amber-500 text-white text-xs px-3 py-1 rounded-full font-bold">便携运维</div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <h3 class="text-2xl font-bold text-oil-900 mb-2 group-hover:text-jade-600 transition-colors">便携式运维检测仪 (B系列)</h3>
+                            <p class="text-gray-500 text-sm mb-4 line-clamp-2">手提箱式设计，现场快速校准电极与涂层磨损检测，无需拆卸设备，运维效率提升60%。</p>
+                            <div class="mt-auto flex justify-between items-center border-t border-gray-100 pt-4">
+                                <span class="text-xs font-mono text-gray-400">Model: YL-M50</span>
+                                <span class="text-jade-600 font-bold text-sm flex items-center">查看详情 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 产品 4: Q系列 -->
+                    <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-gray-100 cursor-pointer flex flex-col" onclick="showProductDetail('q')">
+                        <div class="h-64 bg-gray-100 relative overflow-hidden flex items-center justify-center p-6">
+                            <img src="zhenlie.png" alt="传感器阵列" class="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute top-4 left-4 bg-purple-500 text-white text-xs px-3 py-1 rounded-full font-bold">阵列联动</div>
+                        </div>
+                        <div class="p-8 flex-1 flex flex-col">
+                            <h3 class="text-2xl font-bold text-oil-900 mb-2 group-hover:text-jade-600 transition-colors">区块链联动阵列 (Q系列)</h3>
+                            <p class="text-gray-500 text-sm mb-4 line-clamp-2">分布式传感器阵列，多数据交叉验证，消除单一误差，适用于大型油气田集群监测。</p>
+                            <div class="mt-auto flex justify-between items-center border-t border-gray-100 pt-4">
+                                <span class="text-xs font-mono text-gray-400">Model: YL-A800</span>
+                                <span class="text-jade-600 font-bold text-sm flex items-center">查看详情 <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ★★★ 视图 3: 产品详情页 (Product Detail View) ★★★ -->
+        <section id="view-detail" class="view-section bg-white min-h-screen hidden">
+            <!-- 顶部返回栏 -->
+            <div class="sticky top-20 z-40 bg-white/90 backdrop-blur border-b border-gray-200">
+                <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+                    <button onclick="navigateTo('products')" class="text-gray-500 hover:text-jade-600 font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-arrow-left"></i> 返回列表
+                    </button>
+                    <span class="text-oil-900 font-bold text-lg" id="detail-header-title">产品详情</span>
+                    <div class="w-20"></div> <!-- 占位保持居中 -->
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <!-- 左侧：大图展示 -->
+                    <div class="bg-gray-50 rounded-3xl border border-gray-100 p-8 flex items-center justify-center relative group min-h-[400px]">
+                        <div class="absolute top-4 right-4 flex flex-col gap-2">
+                            <span class="bg-white p-2 rounded-lg shadow-sm text-gray-400 text-xs text-center w-12"><i class="fa-solid fa-temperature-high text-lg block mb-1 text-red-500"></i>高温</span>
+                            <span class="bg-white p-2 rounded-lg shadow-sm text-gray-400 text-xs text-center w-12"><i class="fa-solid fa-shield-halved text-lg block mb-1 text-jade-500"></i>防护</span>
+                        </div>
+                        <img id="detail-image" src="" alt="Product" class="max-h-[350px] w-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-105">
+                    </div>
+
+                    <!-- 右侧：详细信息 -->
+                    <div>
+                        <span class="text-jade-600 font-bold tracking-wider text-sm uppercase bg-jade-50 px-3 py-1 rounded-full" id="detail-series">Series</span>
+                        <h1 class="text-4xl font-black text-oil-900 mt-4 mb-6" id="detail-title">产品名称</h1>
+                        <p class="text-lg text-gray-600 leading-relaxed mb-8" id="detail-desc">
+                            产品描述...
+                        </p>
+
+                        <!-- 核心参数卡片 -->
+                        <div class="bg-oil-900 text-white rounded-2xl p-8 mb-8 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-jade-500/10 rounded-full blur-3xl"></div>
+                            <h4 class="text-jade-400 font-bold mb-6 border-b border-gray-700 pb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-sliders"></i> 技术参数 (Tech Specs)
+                            </h4>
+                            <div class="grid grid-cols-2 gap-y-6 text-sm" id="detail-specs">
+                                <!-- JS填充 -->
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <button onclick="navigateTo('monitor')" class="flex-1 bg-jade-500 hover:bg-jade-400 text-white py-4 rounded-xl font-bold shadow-lg shadow-jade-500/30 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-desktop"></i> 查看监控演示
+                            </button>
+                            <button class="flex-1 border border-slate-300 hover:border-jade-500 hover:text-jade-600 text-gray-700 py-4 rounded-xl font-bold transition-all" onclick="alert('即将下载技术白皮书 PDF')">
+                                <i class="fa-solid fa-download mr-2"></i> 下载白皮书
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ★★★ 视图 4: 新闻资讯 (News - 动态轮播版) ★★★ -->
+        <section id="view-news" class="view-section bg-white min-h-screen">
+            <div class="bg-slate-50 py-16">
+                <div class="max-w-7xl mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-black text-oil-900">新闻动态与里程碑</h2>
+                    <p class="mt-4 text-gray-500">碧鳞智芯团队的最新科研成果、合作进展与行业足迹</p>
+                </div>
+            </div>
+
+            <!-- 动态轮播容器 -->
+            <div class="max-w-7xl mx-auto px-4 py-16 relative group" id="news-carousel-container" onmouseenter="stopNewsAutoPlay()" onmouseleave="startNewsAutoPlay()">
+                
+                <!-- 轮播轨道 (Overflow Hidden Wrapper) -->
+                <div class="overflow-hidden">
+                    <div class="flex transition-transform duration-500 ease-in-out" id="news-track">
+                        <!-- JS 动态注入新闻卡片 -->
+                    </div>
                 </div>
 
-                <!-- Employment Impact Chart -->
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 hover:border-blue-500 transition-colors duration-500" data-aos="zoom-in-left" data-aos-delay="400">
-                    <div class="flex justify-between items-center mb-6">
+                <!-- 左右切换按钮 -->
+                <button onclick="prevNews()" class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white text-oil-900 shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:bg-jade-500 hover:text-white transition-all z-10 focus:outline-none">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextNews()" class="absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white text-oil-900 shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:bg-jade-500 hover:text-white transition-all z-10 focus:outline-none">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <!-- 分页指示点 -->
+                <div class="flex justify-center gap-2 mt-8" id="news-dots">
+                    <!-- JS 动态注入点 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ★★★ 视图 5: 关于我们 (About Us) ★★★ -->
+        <section id="view-about" class="view-section bg-white min-h-screen">
+            <!-- 头部 Banner -->
+            <div class="bg-oil-900 text-white py-20 relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+                    <h1 class="text-4xl md:text-5xl font-black mb-4">关于碧鳞智芯</h1>
+                    <p class="text-lg text-jade-300">让每一组勘探数据都精准可溯、稳定可靠、安全可控</p>
+                </div>
+            </div>
+
+            <!-- 公司简介 -->
+            <div class="max-w-4xl mx-auto px-4 py-20">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-oil-900">公司简介</h2>
+                    <div class="w-12 h-1 bg-jade-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+                <p class="text-gray-600 leading-loose text-justify text-lg mb-8">
+                    <span class="font-bold text-oil-900">北京市碧鳞智芯有限责任公司</span> 是一家以油气勘探传感器智能监测技术为核心的科技型企业。公司依托 <span class="font-bold text-jade-600">中国地质大学（北京）</span> 的深厚科研底蕴，汇聚高校科研人才与行业资深专家，深耕 <b>鱼鳞仿生结构 BDD 涂层技术</b> 与 <b>区块链数据溯源技术</b> 的融合创新。
+                </p>
+                <p class="text-gray-600 leading-loose text-justify text-lg">
+                    我们致力于解决油气勘探传感器早期失效、监测滞后、数据不可靠等行业痛点。通过自主研发的“硬件防护+软件智管”一体化解决方案，填补了地下先进传感器市场空白，助力油气行业实现数字化、绿色化、安全化转型，为建设能源强国、保障国家能源安全提供坚实的技术支撑。
+                </p>
+            </div>
+
+            <!-- 企业文化 -->
+            <div class="bg-slate-50 py-20">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-bold text-oil-900">企业文化</h2>
+                        <p class="mt-4 text-gray-500">诚信致远 · 创新驱动 · 开放协作 · 高效执行</p>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-jade-500 text-center hover:-translate-y-2 transition-transform">
+                            <div class="text-4xl text-jade-500 mb-4"><i class="fa-solid fa-handshake"></i></div>
+                            <h3 class="text-xl font-bold text-oil-900 mb-2">诚信致远</h3>
+                            <p class="text-sm text-gray-500">以诚立身，以信立业，做客户最可信赖的长期伙伴。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-blue-500 text-center hover:-translate-y-2 transition-transform">
+                            <div class="text-4xl text-blue-500 mb-4"><i class="fa-solid fa-lightbulb"></i></div>
+                            <h3 class="text-xl font-bold text-oil-900 mb-2">创新驱动</h3>
+                            <p class="text-sm text-gray-500">技术为核，突破边界，用仿生科技重新定义工业防护。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-amber-500 text-center hover:-translate-y-2 transition-transform">
+                            <div class="text-4xl text-amber-500 mb-4"><i class="fa-solid fa-users"></i></div>
+                            <h3 class="text-xl font-bold text-oil-900 mb-2">开放协作</h3>
+                            <p class="text-sm text-gray-500">跨界融合，共生共赢，构建产学研用一体化生态。</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-purple-500 text-center hover:-translate-y-2 transition-transform">
+                            <div class="text-4xl text-purple-500 mb-4"><i class="fa-solid fa-rocket"></i></div>
+                            <h3 class="text-xl font-bold text-oil-900 mb-2">高效执行</h3>
+                            <p class="text-sm text-gray-500">目标导向，快速响应，以极致执行力交付卓越价值。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 核心团队 -->
+            <div class="max-w-7xl mx-auto px-4 py-20">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-oil-900">核心团队</h2>
+                    <p class="mt-4 text-gray-500">跨学科精英汇聚，产学研深度融合</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all text-center group">
+                        <div class="h-32 bg-gray-100 flex items-end justify-center mb-12 relative">
+                            <img src="lqp.jpg" alt="李奇鹏" class="w-24 h-24 rounded-full border-4 border-white absolute -bottom-12 object-cover shadow-md transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="px-6 pb-8">
+                            <h3 class="text-lg font-bold text-oil-900">李奇鹏</h3>
+                            <p class="text-jade-600 text-sm font-medium mb-4">总经理 / 创始人</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">统筹公司战略规划与运营管理，深耕绿色低碳与数字技术交叉领域，曾获节能减排国赛奖项。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all text-center group">
+                        <div class="h-32 bg-gray-100 flex items-end justify-center mb-12 relative">
+                            <img src="yx.png" alt="于翔" class="w-24 h-24 rounded-full border-4 border-white absolute -bottom-12 object-cover shadow-md transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="px-6 pb-8">
+                            <h3 class="text-lg font-bold text-oil-900">于翔</h3>
+                            <p class="text-jade-600 text-sm font-medium mb-4">首席技术顾问</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">中国地质大学（北京）教授，博导。材料物理专家，获“金锤奖”，拥有20余项国家发明专利。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all text-center group">
+                        <div class="h-32 bg-gray-100 flex items-end justify-center mb-12 relative">
+                            <img src="yr.jpg" alt="于茹" class="w-24 h-24 rounded-full border-4 border-white absolute -bottom-12 object-cover shadow-md transition-transform duration-300 group-hover:scale-110">
+                        </div>
+                        <div class="px-6 pb-8">
+                            <h3 class="text-lg font-bold text-oil-900">于茹</h3>
+                            <p class="text-jade-600 text-sm font-medium mb-4">创业指导顾问</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">材料学院党委副书记，拥有丰富的创新创业指导经验，获评校创新创业先进个人。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all text-center group">
+                        <div class="h-32 bg-gray-100 flex items-end justify-center mb-12 relative">
+                            <div class="w-24 h-24 bg-slate-200 rounded-full border-4 border-white absolute -bottom-12 flex items-center justify-center text-4xl text-gray-400"><i class="fa-solid fa-users"></i></div>
+                        </div>
+                        <div class="px-6 pb-8">
+                            <h3 class="text-lg font-bold text-oil-900">研发与运营团队</h3>
+                            <p class="text-jade-600 text-sm font-medium mb-4">核心骨干</p>
+                            <p class="text-xs text-gray-500 leading-relaxed">汇聚材料科学、人工智能、市场营销等多专业优秀人才，是一支年轻、极具执行力的百强创业团队。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 联系我们 (Contact Us) - 位于关于我们底部，ID用于跳转 -->
+            <div id="contact-section" class="bg-oil-900 text-white py-20">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <!-- 左侧：联系信息 -->
                         <div>
-                            <h3 class="text-xl font-bold text-blue-400">带动就业分布</h3>
-                            <p class="text-sm text-slate-400">预计直接带动200人，间接2000余人</p>
+                            <h2 class="text-3xl font-bold mb-6">联系我们</h2>
+                            <p class="text-gray-400 mb-8">如果您对我们的产品感兴趣，或有任何技术合作需求，欢迎随时联系我们。</p>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-jade-400"><i class="fa-solid fa-location-dot"></i></div>
+                                    <div><h4 class="font-bold text-lg">公司地址</h4><p class="text-gray-400 text-sm">北京市海淀区学院路29号（中国地质大学）</p></div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-jade-400"><i class="fa-solid fa-phone"></i></div>
+                                    <div><h4 class="font-bold text-lg">联系电话</h4><p class="text-gray-400 text-sm">13183383223</p></div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-jade-400"><i class="fa-solid fa-envelope"></i></div>
+                                    <div><h4 class="font-bold text-lg">电子邮箱</h4><p class="text-gray-400 text-sm">Bilin@gmail.com</p></div>
+                                </div>
+                            </div>
                         </div>
-                        <button class="text-xs bg-slate-700 hover:bg-slate-600 px-3 py-1 rounded-md transition-colors" onclick="filterJobData()">
-                            切换视图
-                        </button>
-                    </div>
-                    <!-- Chart Container -->
-                    <div class="chart-container">
-                        <canvas id="jobChart"></canvas>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 mt-4 text-xs text-slate-400">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-jade-500"></span> 研发与技术 (24%)
+
+                        <!-- 右侧：留言表单 -->
+                        <div class="bg-white rounded-2xl p-8 text-slate-800">
+                            <h3 class="text-xl font-bold mb-6">在线留言</h3>
+                            <form onsubmit="alert('感谢您的留言，我们会尽快联系您！'); return false;" class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">您的姓名</label>
+                                    <input type="text" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-jade-500 focus:ring-1 focus:ring-jade-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">联系电话</label>
+                                    <input type="tel" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-jade-500 focus:ring-1 focus:ring-jade-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">咨询内容</label>
+                                    <textarea rows="3" required class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-jade-500 focus:ring-1 focus:ring-jade-500"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-jade-500 hover:bg-jade-600 text-white font-bold py-3 rounded-lg transition-colors">发送留言</button>
+                            </form>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-blue-500"></span> 市场与服务 (23%)
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 rounded-full bg-purple-500"></span> 网站/产品设计 (22%)
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Roadmap & Social Responsibility -->
-    <section id="roadmap" class="py-20 bg-gradient-to-b from-slate-50 to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-black text-oil-900 mb-12 text-center" data-aos="fade-down">从实践中来，到实践中去</h2>
-            
-            <div class="relative">
-                <!-- Timeline Line -->
-                <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gray-200"></div>
-
-                <!-- Item 1 -->
-                <div class="relative z-10 mb-12 md:flex justify-between items-center w-full">
-                    <div class="order-1 md:w-5/12"></div>
-                    <div class="order-1 md:w-5/12 px-6 py-6 bg-white rounded-xl shadow-md border-l-4 border-jade-500 hover:scale-105 transition-transform group" data-aos="fade-left">
-                        <span class="text-xs font-bold text-jade-600 uppercase tracking-wider mb-1 block">Step 01</span>
-                        <h3 class="font-bold text-xl text-gray-800 mb-2 group-hover:text-jade-600 transition-colors">入驻创业园</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">项目成功入驻北京高校大学生创业园，获得政策与场地支持，迈出商业化第一步。</p>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="relative z-10 mb-12 md:flex justify-between items-center w-full">
-                    <div class="order-1 md:w-5/12 text-right px-6 py-6 bg-white rounded-xl shadow-md border-r-4 border-blue-500 hover:scale-105 transition-transform group" data-aos="fade-right">
-                        <span class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1 block">Step 02</span>
-                        <h3 class="font-bold text-xl text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">实地实践考察</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">团队深入油田一线，收集第一手传感器故障数据，现场验证涂层性能，确保产品实战能力。</p>
-                    </div>
-                    <div class="order-1 md:w-5/12"></div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="relative z-10 mb-12 md:flex justify-between items-center w-full">
-                    <div class="order-1 md:w-5/12"></div>
-                    <div class="order-1 md:w-5/12 px-6 py-6 bg-white rounded-xl shadow-md border-l-4 border-amber-500 hover:scale-105 transition-transform group" data-aos="fade-left">
-                        <span class="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1 block">Step 03</span>
-                        <h3 class="font-bold text-xl text-gray-800 mb-2 group-hover:text-amber-600 transition-colors">创新创业宣讲</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">依托中国地质大学（北京）科协，开展暑期生产实习，传播先进技术知识，履行社会责任。</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-oil-900 text-slate-300 py-12 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-4 gap-8">
-            <div class="col-span-2">
-                <div class="flex items-center gap-2 mb-4 text-white">
-                    <img src="logo.png" alt="Logo" class="h-8 w-auto grayscale brightness-200" onerror="this.style.display='none'">
-                    <h4 class="text-2xl font-bold">玉鳞防护</h4>
+        <!-- ★★★ 视图 6: 系统监控台 (System Monitor) ★★★ -->
+        <section id="view-monitor" class="view-section monitor-bg min-h-screen text-white p-4 pb-20">
+            <!-- 恢复的：顶部数据流程图 (Visualized Process) -->
+            <div class="mb-8 bg-oil-900/60 p-6 rounded-xl neon-border overflow-x-auto relative">
+                <div class="absolute inset-0 opacity-20" style="background-image: url('process.png'); background-size: cover; background-position: center;"></div>
+                <h3 class="text-jade-400 font-bold mb-6 text-center text-sm tracking-widest uppercase relative z-10">全流程数据闭环 (Data Processing Loop)</h3>
+                <div class="flex justify-between items-center min-w-[800px] relative z-10">
+                    <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 -z-10"></div>
+                    <div class="absolute top-1/2 left-0 w-full h-0.5 process-line -z-10 opacity-50"></div>
+                    <div class="flex flex-col items-center gap-2 bg-oil-900 p-2 z-10"><div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-jade-500 flex items-center justify-center text-xl shadow-[0_0_15px_rgba(20,184,166,0.5)]">📡</div><span class="text-xs text-gray-300 font-bold">1.数据采集</span></div>
+                    <div class="flex flex-col items-center gap-2 bg-oil-900 p-2 z-10"><div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-blue-500 flex items-center justify-center text-xl">🔗</div><span class="text-xs text-gray-300 font-bold">2.数据上链</span></div>
+                    <div class="flex flex-col items-center gap-2 bg-oil-900 p-2 z-10"><div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-yellow-500 flex items-center justify-center text-xl animate-pulse">🖥️</div><span class="text-xs text-yellow-400 font-bold">3.实时监控</span></div>
+                    <div class="flex flex-col items-center gap-2 bg-oil-900 p-2 z-10"><div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-purple-500 flex items-center justify-center text-xl">📊</div><span class="text-xs text-gray-300 font-bold">4.智能分析</span></div>
+                    <div class="flex flex-col items-center gap-2 bg-oil-900 p-2 z-10"><div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-red-500 flex items-center justify-center text-xl">🛠️</div><span class="text-xs text-gray-300 font-bold">5.主动维护</span></div>
+                    <div class="flex flex-col items-center gap-2 bg-oil-900 p-2 z-10"><div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-green-500 flex items-center justify-center text-xl">🔍</div><span class="text-xs text-gray-300 font-bold">6.及时溯源</span></div>
                 </div>
-                <p class="mb-6 max-w-sm text-slate-400 text-sm leading-relaxed">专注油气勘探传感器性能监测。打造更安全、更智能的能源开采环境。</p>
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-jade-600 transition-all cursor-pointer text-white hover:scale-110">📍</div>
-                    <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-jade-600 transition-all cursor-pointer text-white hover:scale-110">📞</div>
-                    <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-jade-600 transition-all cursor-pointer text-white hover:scale-110">✉️</div>
+            </div>
+
+            <!-- 恢复的：监控面板主体 -->
+            <div class="grid lg:grid-cols-4 gap-6 h-full">
+                <!-- 左侧：设备状态 -->
+                <div class="bg-oil-900/60 p-4 rounded-xl neon-border lg:col-span-1 flex flex-col">
+                    <h3 class="text-jade-400 font-bold mb-4 border-b border-gray-700 pb-2">设备在线状态</h3>
+                    <div class="space-y-3 overflow-y-auto max-h-[400px] no-scrollbar flex-1">
+                        <div class="p-3 bg-jade-900/30 border border-jade-500/30 rounded flex justify-between items-center"><div><div class="text-sm font-bold text-white">Y-Series #001</div><div class="text-xs text-jade-300">深井-30102面</div></div><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_#22c55e]"></span></div>
+                        <div class="p-3 bg-slate-800/50 border border-gray-700 rounded flex justify-between items-center opacity-70"><div><div class="text-sm font-bold text-gray-300">H-Series #042</div><div class="text-xs text-gray-500">渤海平台-B区</div></div><span class="w-2 h-2 rounded-full bg-green-500"></span></div>
+                        <div class="p-3 bg-red-900/20 border border-red-500/30 rounded flex justify-between items-center"><div><div class="text-sm font-bold text-red-200">B-Series #009</div><div class="text-xs text-red-400">电量低 (15%)</div></div><span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span></div>
+                    </div>
+                </div>
+                <!-- 中间：核心图表 -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-oil-900/60 p-5 rounded-xl neon-border">
+                        <div class="flex justify-between items-center mb-4"><h3 class="text-white font-bold flex items-center gap-2"><i class="fa-solid fa-chart-line text-jade-500"></i> 腐蚀电位趋势 (Corrosion Potential)</h3><span class="text-xs bg-slate-700 px-2 py-1 rounded text-gray-300">实时</span></div>
+                        <div class="h-64 w-full"><canvas id="corrosionChart"></canvas></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-oil-900/60 p-4 rounded-xl neon-border text-center"><h4 class="text-gray-400 text-xs mb-2">油接触角 (Oil Contact Angle)</h4><div class="text-3xl font-black text-jade-400">110.2°</div><div class="text-[10px] text-gray-500 mt-1">基准: 110±2° (疏油性优)</div></div>
+                        <div class="bg-oil-900/60 p-4 rounded-xl neon-border text-center"><h4 class="text-gray-400 text-xs mb-2">涂层厚度 (Coating Thickness)</h4><div class="text-3xl font-black text-blue-400">4.82 μm</div><div class="text-[10px] text-gray-500 mt-1">磨损率: < 0.01% / 周</div></div>
+                    </div>
+                </div>
+                <!-- 右侧：异常日志 -->
+                <div class="bg-oil-900/60 p-4 rounded-xl neon-border">
+                    <h3 class="text-red-400 font-bold mb-4 border-b border-gray-700 pb-2">异常记录查询 (Logs)</h3>
+                    <div class="space-y-4 text-xs">
+                        <div class="bg-slate-800/80 p-3 rounded border-l-2 border-red-500"><div class="flex justify-between text-gray-400 mb-1"><span>10:42:05</span><span>Y-Series</span></div><div class="text-white font-bold">腐蚀电位异常波动</div><div class="text-gray-500 mt-1">> -0.85V (阈值: -0.80V)</div></div>
+                        <div class="bg-slate-800/80 p-3 rounded border-l-2 border-yellow-500"><div class="flex justify-between text-gray-400 mb-1"><span>09:15:22</span><span>H-Series</span></div><div class="text-white font-bold">建议自清洁启动</div><div class="text-gray-500 mt-1">表面附着物检测 > 5%</div></div>
+                    </div>
+                    <button class="w-full mt-6 py-2 bg-slate-700 hover:bg-slate-600 rounded text-gray-300 text-xs transition">导出完整报告</button>
                 </div>
             </div>
-            <div>
-                <h5 class="text-white font-bold mb-4">快速链接</h5>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-jade-400 transition-colors hover:pl-1">产品中心</a></li>
-                    <li><a href="#" class="hover:text-jade-400 transition-colors hover:pl-1">解决方案</a></li>
-                    <li><a href="#" class="hover:text-jade-400 transition-colors hover:pl-1">关于我们</a></li>
-                    <li><a href="#" class="hover:text-jade-400 transition-colors hover:pl-1">新闻动态</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-white font-bold mb-4">依托单位</h5>
-                <ul class="space-y-2 text-sm">
-                    <li>中国地质大学（北京）</li>
-                    <li>材料科学与工程学院</li>
-                    <li>校科协 / 创客空间</li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-            &copy; 2024 玉鳞防护团队. All rights reserved. | 挑战杯参赛项目
+        </section>
+
+    </main>
+
+    <!-- 底部 -->
+    <footer id="main-footer" class="bg-white border-t border-gray-200 py-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <img src="logo.png" alt="Logo" class="h-8 w-auto mx-auto mb-4 opacity-50">
+            <p class="text-gray-400 text-sm mb-4">&copy; 2026 碧鳞智芯团队 | 依托中国地质大学（北京）</p>
         </div>
     </footer>
 
-    <!-- AOS Script -->
+    <!-- JS 逻辑 -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <!-- JavaScript Application Logic -->
     <script>
-        // --- Initialize AOS ---
-        AOS.init({
-            once: false,
-            offset: 100,
-            duration: 800,
-            easing: 'ease-out-cubic',
-        });
+        AOS.init();
 
-        // --- State Management ---
-        const appState = {
-            activeTab: 'coating',
-            chartsInitialized: false
+        // 1. 路由逻辑
+        function navigateTo(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.remove('active');
+                setTimeout(() => { if(!el.classList.contains('active')) el.style.display = 'none'; }, 300);
+            });
+
+            const target = document.getElementById('view-' + viewId);
+            if (target) {
+                target.style.display = 'block';
+                setTimeout(() => target.classList.add('active'), 10);
+            }
+
+            if (viewId === 'monitor') {
+                document.getElementById('main-footer').style.display = 'none';
+                initMonitorCharts();
+            } else {
+                document.getElementById('main-footer').style.display = 'block';
+            }
+            
+            if (viewId === 'news') {
+                initNewsCarousel();
+            }
+
+            window.scrollTo(0,0);
+        }
+
+        // 跳转到联系我们功能
+        function jumpToContact() {
+            navigateTo('about'); 
+            setTimeout(() => {
+                const contactSection = document.getElementById('contact-section');
+                if (contactSection) {
+                    contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
+        }
+
+        // 2. 产品数据中心
+        const products = {
+            'y': { title: "井下耐高温高压多参数传感器 (Y系列)", img: "chuanganqi.png", series: "Y-Series Deep Earth", desc: "针对深层油气勘探设计。产品电极创新采用鱼鳞仿生结构与氟化改性双重防护设计，搭配优化升级的BDD涂层，可完美适配150℃高温、50MPa高压的极端井下环境。", specs: [{k:"耐温等级", v:"150℃"}, {k:"耐压等级", v:"50MPa"}, {k:"防护技术", v:"BDD仿生涂层+氟化改性"}, {k:"监测参数", v:"含水率/压力/温度"}] },
+            'h': { title: "海洋油气平台防腐蚀监测终端 (H系列)", img: "jiance.png", series: "H-Series Ocean", desc: "专为海洋环境设计。BDD涂层新增抗海洋盐雾腐蚀专属配方，结合高精度水下密封封装技术，防水深度可达2000米，有效抵御海洋盐雾、海水侵蚀。", specs: [{k:"防水深度", v:"2000米"}, {k:"抗腐蚀", v:"抗盐雾配方"}, {k:"附加功能", v:"自清洁/潮汐采集"}, {k:"通信", v:"水下有线/声纳"}] },
+            'b': { title: "便携式传感器运维检测仪 (B系列)", img: "yunweiyi.png", series: "B-Series Portable", desc: "打破传统运维局限，手提箱式设计。集成BDD涂层磨损度检测、电极导电性校准两大核心功能，支持现场快速校准，运维效率提升60%以上。", specs: [{k:"功能", v:"磨损检测/电极校准"}, {k:"便携性", v:"手提箱式/自带屏幕"}, {k:"效率提升", v:"60%"}, {k:"数据同步", v:"实时上链"}] },
+            'q': { title: "区块链联动式传感器阵列 (Q系列)", img: "zhenlie.png", series: "Q-Series Array", desc: "面向大型油气田集群。由4-8个分布式传感器组成，通过区块链技术实现多传感器数据交叉验证，有效消除单一传感器的监测误差。", specs: [{k:"组网方式", v:"分布式阵列"}, {k:"核心优势", v:"数据交叉验证"}, {k:"调度", v:"智能合约自动调度"}, {k:"适用", v:"大型油气田集群"}] }
         };
 
-        // --- Data Storage (Extracted from PPT) ---
-        const projectData = {
-            financials: {
-                years: ['第一年', '第二年', '第三年', '第四年', '第五年'],
-                revenue: [13.6, 34.6, 84.6, 150.2, 230.5]
-            },
-            employment: {
-                labels: ['研发', '产品设计', '网站开发', '售前服务', '售后服务', '营销', '信息服务', '市场服务', '宣传运营', '远程管理'],
-                data: [13, 11, 11, 8, 9, 8, 7, 15, 5, 13]
-            }
-        };
-
-        // --- Core Interactions ---
-
-        // 1. Navigation Scroll
-        function scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
+        function showProductDetail(pid) {
+            const p = products[pid];
+            document.getElementById('detail-title').innerText = p.title;
+            document.getElementById('detail-image').src = p.img;
+            document.getElementById('detail-series').innerText = p.series;
+            document.getElementById('detail-desc').innerText = p.desc;
+            const specsHtml = p.specs.map(s => `<div><div class="text-gray-400 text-xs">${s.k}</div><div class="text-white font-mono text-base font-bold">${s.v}</div></div>`).join('');
+            document.getElementById('detail-specs').innerHTML = specsHtml;
+            navigateTo('detail');
         }
 
-        // 2. Tech Tab Switching
-        function switchTech(targetId) {
-            appState.activeTab = targetId;
+        // 3. 新闻轮播逻辑
+        const newsList = [
+            { date: "2026-01-23", tag: "重大喜讯", color: "bg-jade-500", img: "zhongbiao.png", title: "中标中海石油北京研究中心招标项目", desc: "碧鳞智芯团队（依托中国地质大学北京）成功中标中海石油（中国）有限公司北京研究中心发布的“典型油气平台周边海域生物资源多样性评估及演化预测”项目，标志着技术实力获得央企认可。" },
+            { date: "2023-03-13", tag: "学术交流", color: "bg-blue-500", img: "huiyi.png", title: "受邀参加第六届CEAM国际会议", desc: "团队成员受邀参加2023年第六届化学工程与先进材料国际会议（CEAM 2023），关于硼掺杂金刚石薄膜（BDD）的研究论文已被大会录用，并将在重庆进行学术交流。" },
+            { date: "行业展会", tag: "行业盛会", color: "bg-amber-500", img: "shiyou.png", title: "亮相第23届CIPPE石油石化装备展", desc: "碧鳞智芯受邀参加第二十三届中国国际石油石化技术装备展览会（CIPPE），与中石油、中石化等行业巨头同台展示，深入了解能源装备数字化转型的前沿趋势。" },
+            { date: "2023-05", tag: "专家风采", color: "bg-purple-500", img: "baogao.png", title: "首席顾问于翔教授作特邀报告", desc: "公司首席技术顾问于翔教授受邀出席2023国际石油石化技术会议（IPPTC），发表题为《表面工程助力油气装置数字化发展》的特邀报告并担任分会场主持人。" },
+            { date: "里程碑", tag: "企业成长", color: "bg-green-500", img: "chuangyeyuan.png", title: "正式获批入驻北京高校大学生创业园", desc: "凭借扎实的技术创新能力与广阔的市场前景，碧鳞智芯项目经过层层选拔，成功获批入驻北京高校大学生创业园（良乡园），获得政策与场地双重支持。" },
+            { date: "商业落地", tag: "战略合作", color: "bg-red-500", img: "safe.png", title: "与北京赛必达达成合作意向", desc: "碧鳞智芯与北京赛必达科技有限公司（SafeDa）正式达成初步合作意向，双方将即将签订战略合作协议，共同推动油气传感器监测技术的市场化应用。" }
+        ];
 
-            document.querySelectorAll('.tech-tab').forEach(btn => {
-                if (btn.dataset.target === targetId) {
-                    btn.classList.remove('bg-gray-50', 'text-gray-600', 'hover:bg-gray-100', 'hover:shadow-md');
-                    btn.classList.add('bg-jade-500', 'text-white', 'shadow-lg', 'ring-2', 'ring-jade-500', 'ring-offset-2');
-                } else {
-                    btn.classList.add('bg-gray-50', 'text-gray-600', 'hover:bg-gray-100', 'hover:shadow-md');
-                    btn.classList.remove('bg-jade-500', 'text-white', 'shadow-lg', 'ring-2', 'ring-jade-500', 'ring-offset-2');
-                }
-            });
+        let currentSlide = 0;
+        let slideInterval;
+        let itemsPerSlide = 3;
 
-            document.querySelectorAll('.tech-content').forEach(content => {
-                if (content.id === `content-${targetId}`) {
-                    content.classList.remove('hidden');
-                    setTimeout(() => content.classList.add('active'), 10);
-                } else {
-                    content.classList.remove('active');
-                    setTimeout(() => content.classList.add('hidden'), 400);
-                }
-            });
+        function initNewsCarousel() {
+            const track = document.getElementById('news-track');
+            track.innerHTML = newsList.map(news => `
+                <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-4">
+                    <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col cursor-pointer group">
+                        <div class="h-48 overflow-hidden relative flex-shrink-0">
+                            <img src="${news.img}" alt="${news.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute top-4 left-4 ${news.color} text-white text-xs px-3 py-1 rounded-full font-bold shadow-md">${news.tag}</div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="text-xs text-gray-400 mb-2 flex items-center gap-2"><i class="fa-regular fa-calendar"></i> ${news.date}</div>
+                            <h3 class="text-lg font-bold text-oil-900 mb-3 group-hover:text-jade-600 transition-colors line-clamp-2">${news.title}</h3>
+                            <p class="text-sm text-gray-500 line-clamp-3 leading-relaxed flex-1">${news.desc}</p>
+                            <div class="mt-4 pt-4 border-t border-gray-50 text-jade-600 text-xs font-bold flex items-center justify-end group-hover:translate-x-1 transition-transform">
+                                阅读更多 <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            updateDots();
+            window.addEventListener('resize', updateCarouselLayout);
+            updateCarouselLayout();
+            startNewsAutoPlay();
         }
 
-        // --- Chart Initialization (Chart.js) ---
-        let chartRev, chartJob;
+        function updateCarouselLayout() {
+            const width = window.innerWidth;
+            if (width < 768) itemsPerSlide = 1; else if (width < 1024) itemsPerSlide = 2; else itemsPerSlide = 3;
+            updateSlidePosition();
+            updateDots();
+        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initCharts();
-            
-            window.addEventListener('scroll', () => {
-                const nav = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    nav.classList.add('shadow-md', 'bg-white/95');
-                    nav.classList.remove('bg-white/90');
-                } else {
-                    nav.classList.remove('shadow-md', 'bg-white/95');
-                    nav.classList.add('bg-white/90');
-                }
-            });
-        });
-
-        function initCharts() {
-            // Chart 1: Revenue (Bar)
-            const ctxRev = document.getElementById('revenueChart').getContext('2d');
-            
-            const gradientRev = ctxRev.createLinearGradient(0, 0, 0, 400);
-            gradientRev.addColorStop(0, '#14b8a6');
-            gradientRev.addColorStop(1, '#0f766e');
-
-            chartRev = new Chart(ctxRev, {
-                type: 'bar',
-                data: {
-                    labels: projectData.financials.years,
-                    datasets: [{
-                        label: '营业收入 (万元)',
-                        data: projectData.financials.revenue,
-                        backgroundColor: gradientRev,
-                        borderRadius: 6,
-                        barPercentage: 0.6,
-                        hoverBackgroundColor: '#2dd4bf'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: 2000,
-                        easing: 'easeOutQuart'
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                            padding: 12,
-                            titleFont: { size: 14 },
-                            bodyFont: { size: 14 },
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) { label += ': '; }
-                                    if (context.parsed.y !== null) { label += context.parsed.y + ' 万元'; }
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                            ticks: { color: '#94a3b8' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#94a3b8' }
-                        }
-                    }
-                }
-            });
-
-            // Chart 2: Employment (Doughnut)
-            const ctxJob = document.getElementById('jobChart').getContext('2d');
-            chartJob = new Chart(ctxJob, {
-                type: 'doughnut',
-                data: {
-                    labels: projectData.employment.labels,
-                    datasets: [{
-                        data: projectData.employment.data,
-                        backgroundColor: [
-                            '#14b8a6', '#0d9488', '#0f766e',
-                            '#3b82f6', '#2563eb', '#1d4ed8',
-                            '#8b5cf6', '#7c3aed', '#6d28d9',
-                            '#f59e0b'
-                        ],
-                        borderWidth: 0,
-                        hoverOffset: 15
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutout: '65%',
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true,
-                        duration: 1500
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                color: '#94a3b8',
-                                boxWidth: 10,
-                                padding: 10,
-                                font: { size: 11 }
-                            }
-                        }
-                    }
-                }
+        function updateSlidePosition() {
+            const track = document.getElementById('news-track');
+            const percentage = 100 / itemsPerSlide;
+            track.style.transform = `translateX(-${currentSlide * percentage}%)`;
+            const dots = document.querySelectorAll('.news-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) { dot.classList.add('bg-jade-500', 'w-6'); dot.classList.remove('bg-gray-300', 'w-2'); } 
+                else { dot.classList.remove('bg-jade-500', 'w-6'); dot.classList.add('bg-gray-300', 'w-2'); }
             });
         }
 
-        // Filter interaction example
-        function filterJobData() {
-            if (chartJob) {
-                chartJob.reset();
-                chartJob.update();
-            }
-            alert("交互演示：数据视图已刷新，模拟数据筛选动画。");
+        function updateDots() {
+            const dotsContainer = document.getElementById('news-dots');
+            const maxIndex = Math.max(0, newsList.length - itemsPerSlide); 
+            let dotsHtml = '';
+            for(let i=0; i <= maxIndex; i++) { dotsHtml += `<div class="news-dot h-2 rounded-full transition-all duration-300 cursor-pointer bg-gray-300 w-2" onclick="goToSlide(${i})"></div>`; }
+            dotsContainer.innerHTML = dotsHtml;
+            updateSlidePosition();
         }
 
+        function nextNews() { const maxIndex = Math.max(0, newsList.length - itemsPerSlide); if (currentSlide < maxIndex) currentSlide++; else currentSlide = 0; updateSlidePosition(); }
+        function prevNews() { const maxIndex = Math.max(0, newsList.length - itemsPerSlide); if (currentSlide > 0) currentSlide--; else currentSlide = maxIndex; updateSlidePosition(); }
+        function goToSlide(index) { currentSlide = index; updateSlidePosition(); }
+        function startNewsAutoPlay() { clearInterval(slideInterval); slideInterval = setInterval(nextNews, 3000); }
+        function stopNewsAutoPlay() { clearInterval(slideInterval); }
+
+        // 4. 监控图表 (腐蚀电位)
+        let monitorChart = null;
+        function initMonitorCharts() {
+            if(monitorChart) return;
+            const ctx = document.getElementById('corrosionChart').getContext('2d');
+            const initialData = Array.from({length: 30}, () => -0.45 + (Math.random() * 0.05 - 0.025));
+            monitorChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels: Array.from({length: 30}, (_, i) => i), datasets: [{ label: '电位 (V)', data: initialData, borderColor: '#14b8a6', backgroundColor: 'rgba(20, 184, 166, 0.1)', borderWidth: 2, tension: 0.4, fill: true, pointRadius: 0 }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { grid: { color: '#334155' }, ticks: { color: '#94a3b8' }, suggestedMin: -0.6, suggestedMax: -0.3 }, x: { display: false } }, animation: false }
+            });
+            setInterval(() => {
+                const newVal = -0.45 + (Math.random() * 0.05 - 0.025);
+                monitorChart.data.datasets[0].data.shift();
+                monitorChart.data.datasets[0].data.push(newVal);
+                monitorChart.update();
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => { navigateTo('home'); });
     </script>
 </body>
 </html>
